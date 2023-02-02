@@ -11,7 +11,10 @@ import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
 
 public class Login {
+
     private List<User> listUsers = loadDB();
+
+    static Scanner scanner = new Scanner(System.in);
 
     public void doLogin() throws InterruptedException {
 
@@ -22,18 +25,18 @@ public class Login {
 
         // read from kb a user
         //while user from kb ! = a user in db stay here
-        int maxtries = 3;
+        int maxTries = 1;
         boolean succes = false;
         User userKb = new User();
         do {
             System.out.print("username: ");
-            String kbUsername = new Scanner(System.in).nextLine();
+            String kbUsername = scanner.nextLine();
             System.out.print("pwd: ");
-            String kbPwd = new Scanner(System.in).nextLine();
+            String kbPwd = scanner.nextLine();
             System.out.print("analyst: ");
-            String kbAnalyst = new Scanner(System.in).nextLine();
+            String kbAnalyst = scanner.nextLine();
             System.out.print("admin: ");
-            String kbAdmin = new Scanner(System.in).nextLine();
+            String kbAdmin = scanner.nextLine();
 
             userKb.setUsername(kbUsername);
             userKb.setPassword(kbPwd);
@@ -49,9 +52,9 @@ public class Login {
                 }
 
             }
-            maxtries--;
-            if (maxtries == 0) {
-                maxtries = 3;
+            maxTries--;
+            if (maxTries == 0) {
+                maxTries = 1;
                 System.out.println("you have to wait 10 seconds before you can try again :) ");
                 TimeUnit.SECONDS.sleep(10);
             }
@@ -72,6 +75,7 @@ public class Login {
     }
 
     static void printAdminMeniu (){
+
         // selectare pentru:
         // 1- print news
         // 2 - add user => new method addUser()
@@ -81,22 +85,27 @@ public class Login {
 
     }
 
-    static void addUser(){
+     void addUser(){
 
         User username = new User();
 
         System.out.print("username: ");
-        String kbUsername = new Scanner(System.in).nextLine();
+        String kbUsername = scanner.nextLine();
         System.out.print("pwd: ");
-        String kbPwd = new Scanner(System.in).nextLine();
-        System.out.print("analyst: ");
-        String kbAnalyst = new Scanner(System.in).nextLine();
-        System.out.print("admin: ");
-        String kbAdmin = new Scanner(System.in).nextLine();
+        String kbPwd = scanner.nextLine();
 
-        System.out.println("Admin: ");
-        boolean isAdmin = Boolean.parseBoolean(Scanner.nextLine());
+        System.out.print("is analyst: ");
+        boolean isAnalyst = Boolean.parseBoolean(scanner.nextLine());
+        username.setAnalyst(isAnalyst);
+
+        System.out.print("admin: ");
+        boolean isAdmin = Boolean.parseBoolean(scanner.nextLine());
         username.setAdmin(isAdmin);
+
+
+
+
+
     }
     private List<User> loadDB() {
 
@@ -126,9 +135,11 @@ public class Login {
 
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } finally {
+        }
+        finally {
         }
 
         return listOfUsers;
     }
 
+}
