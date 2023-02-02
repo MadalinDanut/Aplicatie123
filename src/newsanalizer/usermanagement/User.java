@@ -19,6 +19,21 @@ public class User {
         this.password = password;
     }
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public boolean isAnalyst() {
+        return isAnalyst;
+    }
+
+    public void setAnalyst(boolean analyst) {
+        isAnalyst = analyst;
+    }
 
     public boolean equalsUsers(Object o) {
         if (this == o) return true;
@@ -31,7 +46,9 @@ public class User {
     public int hashCode() {
         return Objects.hash(username, password);
     }
+    private boolean isAdmin;
 
+    private boolean isAnalyst;
     private String username;
     private String password;
 
