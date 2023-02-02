@@ -1,0 +1,3 @@
+madalin pwd1
+jenny pwd2
+danut pwd3
